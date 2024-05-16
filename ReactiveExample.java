@@ -3,17 +3,14 @@ import reactor.core.publisher.Flux;
 public class ReactiveExample {
 
     public static void main(String[] args) {
-        // Creating a Flux that emits integers from 1 to 5
-        Flux<Integer> numbersFlux = Flux.just(1, 2, 3, 4, 5);
+        // Create a Flux emitting integers from 1 to 10
+        Flux<Integer> numbersFlux = Flux.range(1, 10);
 
-        // Subscribing to the Flux and printing each emitted item
+        // Subscribe to the Flux and define actions for onNext, onError, and onComplete events
         numbersFlux.subscribe(
-                // onNext callback
-                number -> System.out.println("Received number: " + number),
-                // onError callback
-                error -> System.err.println("Error: " + error),
-                // onComplete callback
-                () -> System.out.println("Flux completed.")
+                value -> System.out.println("Received: " + value), // onNext
+                error -> System.err.println("Error: " + error),   // onError
+                () -> System.out.println("Completed!")           // onComplete
         );
     }
 }
